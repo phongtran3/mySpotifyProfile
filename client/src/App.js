@@ -1,10 +1,15 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Login from "./components/Login";
 import Profile from "./components/Profile";
-
-const code = new URLSearchParams(window.location.search).get("code");
+import { token } from "./spotify";
 
 export default function App() {
-  return code ? <Profile code={code} /> : <Login />;
+  const [accessToken, setAccessToken] = useState("");
+
+  // useEffect(() => {
+  //   setAccessToken(token);
+  // }, []);
+
+  return accessToken ? <Profile /> : <Login />;
 }
