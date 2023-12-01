@@ -49,3 +49,12 @@ export const getAccessToken = () => {
 };
 
 export const token = getAccessToken();
+
+export const logout = () => {
+  window.localStorage.removeItem("spotifyTokenTimeStamp");
+  window.localStorage.removeItem("spotifyAccessToken");
+  window.localStorage.removeItem("spotifyRefreshToken");
+  window.location.reload();
+};
+
+//SPOTIFY API CALLS
