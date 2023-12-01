@@ -1,4 +1,6 @@
 import React from "react";
+import { BrowserRouter as Router } from "react-router-dom";
+
 import { logout } from "../spotify";
 
 export default function Profile() {
