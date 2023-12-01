@@ -112,6 +112,30 @@ app.get("/callback", async (req, res) => {
   }
 });
 
+app.get("/refresh_token", async (req, res) => {
+  const refreshToken = req.query.refresh_token;
+  try {
+    const response = await axios.post(
+      "https://accounts.spotify.com/api/token",
+      new URLSearchParams({
+        grant_type: "refresh_token",
+        refreshToken,
+      }),
+      {
+        headers: {
+          "Content-Type": "application/x-www-form-urlencoded",
+          Authorization: `Basic ${Buffer.from(`${CLIENT_ID}:${CLIENT_SECRET}`).toString("base64")}`,
+        },
+      }
+    );
+
+    const accessToken = response.data.access.token;
+    res.send({ accessToken });
+  } catch (err) {
+    res.status(500).send({ error: "Internal Server Error" });
+  }
+});
+
 app.get("/", function (req, res) {
   res.render(path.resolve(__dirname, "../client/build/index.html"));
   //res.send({ message: "Hello World!" });
