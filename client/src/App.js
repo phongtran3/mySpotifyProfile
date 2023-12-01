@@ -7,9 +7,9 @@ import { token } from "./spotify";
 export default function App() {
   const [accessToken, setAccessToken] = useState("");
 
-  // useEffect(() => {
-  //   setAccessToken(token);
-  // }, []);
+  useEffect(() => {
+    setAccessToken(token);
+  }, []);
 
   return accessToken ? <Profile /> : <Login />;
 }

@@ -20,7 +20,7 @@ let REDIRECT_URI = process.env.REDIRECT_URI || "http://localhost:3030/callback";
 let FRONTEND_URI = process.env.FRONTEND_URI || "http://localhost:3000";
 
 if (process.env.NODE_ENV !== "production") {
-  REDIRECT_URI = "http://localhost:3000/callback";
+  REDIRECT_URI = "http://localhost:3001/callback";
   FRONTEND_URI = "http://localhost:3000";
 }
 
@@ -60,6 +60,7 @@ app.get("/login", (req, res) => {
   const scope =
     "user-read-email user-read-private user-read-recently-played user-top-read user-follow-read user-follow-modify playlist-read-private playlist-read-collaborative playlist-modify-public";
   const state = generateRandomString(16);
+  res.cookie(stateKey, state);
 
   res.redirect(
     `https://accounts.spotify.com/authorize?${querystring.stringify({
@@ -73,6 +74,7 @@ app.get("/login", (req, res) => {
 });
 
 app.get("/callback", async (req, res) => {
+  console.log("Callback");
   //application requests refresh and access tokens after checking the state parameter
   const code = req.query.code || null;
   const state = req.query.state || null;
@@ -113,6 +115,7 @@ app.get("/callback", async (req, res) => {
 });
 
 app.get("/refresh_token", async (req, res) => {
+  console.log("Refresh");
   const refreshToken = req.query.refresh_token;
   try {
     const response = await axios.post(
