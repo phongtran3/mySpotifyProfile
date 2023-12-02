@@ -54,7 +54,7 @@ export const logout = () => {
   window.localStorage.removeItem("spotifyTokenTimeStamp");
   window.localStorage.removeItem("spotifyAccessToken");
   window.localStorage.removeItem("spotifyRefreshToken");
-  window.location.reload();
+  window.location = "/";
 };
 
 //SPOTIFY API CALLS
