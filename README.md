@@ -29,11 +29,6 @@
 
 - As a user, I want to see my recently played tracks.
 
-**Social Connections:**
-
-- As a user, I want to see my list of followers.
-- As a user, I want to see my list of following.
-
 **Playlists:**
 
 - As a user, I want to see my playlists.
