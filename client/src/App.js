@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import "bootstrap/dist/css/bootstrap.min.css";
 
 import Login from "./components/Login";
 import Home from "./components/Home";
@@ -11,7 +10,13 @@ import Playlists from "./components/Playlists";
 
 import { token } from "./spotify";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import { Container } from "react-bootstrap";
+import styled from "styled-components";
+import GlobalStyle from "./styles/GlobalStyle";
+
+const AppContainer = styled.div`
+  height: 100%;
+  min-height: 100vh;
+`;
 
 export default function App() {
   const [accessToken, setAccessToken] = useState("");
@@ -21,9 +26,10 @@ export default function App() {
   }, []);
 
   return (
-    <Container>
+    <AppContainer>
       {accessToken && <NavBar />}
       <BrowserRouter>
+        <GlobalStyle />
         <Routes>
           <Route index path="/" element={accessToken ? <Home /> : <Login />} />
           <Route path="artists" element={<TopArtists />} />
@@ -32,6 +38,6 @@ export default function App() {
           <Route path="playlists" element={<Playlists />} />
         </Routes>
       </BrowserRouter>
-    </Container>
+    </AppContainer>
   );
 }
