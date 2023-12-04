@@ -8,6 +8,12 @@ const mixins = {
     justify-content: center;
     align-items: center;
   `,
+
+  flexBetween: css`
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  `,
 };
 
 export default mixins;

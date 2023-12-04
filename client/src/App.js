@@ -27,8 +27,8 @@ export default function App() {
 
   return (
     <AppContainer>
-      {accessToken && <NavBar />}
       <BrowserRouter>
+        {accessToken && <NavBar />}
         <GlobalStyle />
         <Routes>
           <Route index path="/" element={accessToken ? <Home /> : <Login />} />

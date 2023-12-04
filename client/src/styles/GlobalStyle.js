@@ -1,7 +1,11 @@
 import { createGlobalStyle } from "styled-components";
 import theme from "./theme";
 const { colors, fontSizes, fonts } = theme;
+
 const GlobalStyle = createGlobalStyle`
+  #root {
+    min-height: 100%;
+  }
 
   html {
     box-sizing: border-box;
@@ -39,7 +43,12 @@ const GlobalStyle = createGlobalStyle`
     transition: ${theme.transition};
     cursor: pointer;
   }
-
+  
+  ol, ul {
+    padding: 0;
+    margin: 0;
+    list-style: none;
+  }
 `;
 
 export default GlobalStyle;

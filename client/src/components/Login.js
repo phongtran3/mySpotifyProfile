@@ -21,7 +21,7 @@ const LoginButton = styled.a`
   background-color: ${colors.green};
   color: ${colors.white};
   border-radius: 30px;
-  padding: 17px 35px;
+  padding: 15px 30px;
   margin: 20px 0 70px;
   min-width: 160px;
   font-weight: 700;
@@ -37,7 +37,8 @@ const LoginButton = styled.a`
 export default function Login() {
   return (
     <LoginContainer>
-      <h1 style={{ color: "#FFFFFF" }}>Spotify Profile</h1>
+      <h1 style={{ color: colors.white }}>MySpotifyProfile</h1>
+      <h3 style={{ color: colors.lightGrey }}>A place to visualize your personalized Spotfiy data</h3>
       <LoginButton href={LOGIN_URI}>Login With Spotify</LoginButton>
     </LoginContainer>
   );
