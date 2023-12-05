@@ -3,7 +3,7 @@ const theme = {
   colors: {
     green: "#1DB954",
     darkGreen: "#137736",
-    offGreen: "#1ed760",
+    offGreen: "#43E57D",
     blue: "#509bf5",
     navBlack: "#040306",
     black: "#0f0f0f",

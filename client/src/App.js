@@ -28,15 +28,17 @@ export default function App() {
   return (
     <AppContainer>
       <BrowserRouter>
-        {accessToken && <NavBar />}
         <GlobalStyle />
-        <Routes>
+        {accessToken ? <Home /> : <Login />}
+        {/* {accessToken && <NavBar />} */}
+
+        {/* <Routes>
           <Route index path="/" element={accessToken ? <Home /> : <Login />} />
           <Route path="artists" element={<TopArtists />} />
           <Route path="tracks" element={<TopTracks />} />
           <Route path="recent" element={<RecentlyPlayed />} />
           <Route path="playlists" element={<Playlists />} />
-        </Routes>
+        </Routes> */}
       </BrowserRouter>
     </AppContainer>
   );
