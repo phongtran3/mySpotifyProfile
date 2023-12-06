@@ -16,7 +16,7 @@ const axios = require("axios");
 const CLIENT_ID = process.env.CLIENT_ID;
 const CLIENT_SECRET = process.env.CLIENT_SECRET;
 const PORT = process.env.PORT || 3002;
-let REDIRECT_URI = process.env.REDIRECT_URI || "http://localhost:3030/callback";
+let REDIRECT_URI = process.env.REDIRECT_URI || "http://localhost:3001/callback";
 let FRONTEND_URI = process.env.FRONTEND_URI || "http://localhost:3000";
 
 if (process.env.NODE_ENV !== "production") {
@@ -122,7 +122,7 @@ app.get("/refresh_token", async (req, res) => {
       "https://accounts.spotify.com/api/token",
       new URLSearchParams({
         grant_type: "refresh_token",
-        refreshToken,
+        refresh_token: refreshToken,
       }),
       {
         headers: {
@@ -132,7 +132,7 @@ app.get("/refresh_token", async (req, res) => {
       }
     );
 
-    const accessToken = response.data.access.token;
+    const accessToken = response.data.access_token;
     res.send({ accessToken });
   } catch (err) {
     res.status(500).send({ error: "Internal Server Error" });

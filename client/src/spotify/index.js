@@ -15,10 +15,12 @@ const getLocalRefreshToken = () => window.localStorage.getItem("spotifyRefreshTo
 
 const refreshAccessToken = async () => {
   try {
-    const { data } = await axios.get(`/refresh_token?refresh_token=${getLocalRefreshToken()}`);
+    console.log("Refreshing...");
+    const { data } = await axios.get(`http://localhost:3001/refresh_token?refresh_token=${getLocalRefreshToken()}`);
     const { access_token } = data;
     setLocalAccessToken(access_token);
     window.location.reload();
+    console.log("Returning...");
     return;
   } catch (err) {
     console.error(err);
@@ -32,7 +34,7 @@ export const getAccessToken = () => {
     refreshAccessToken();
   }
 
-  if (Date.now() - getTokenTimestamp() - EXPIRATION_TIME) {
+  if (Date.now() - getTokenTimestamp() > EXPIRATION_TIME) {
     console.warn("Access token has expired, refreshing...");
     refreshAccessToken();
   }
