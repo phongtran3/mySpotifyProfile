@@ -1,5 +1,12 @@
 //https://cssloaders.github.io/
 import styled, { keyframes } from "styled-components";
+import mixins from "./mixins";
+
+const Container = styled.div`
+  ${mixins.flexCenter};
+  width: 100%;
+  height: 90vh;
+`;
 
 const rikSpikeRoll = keyframes`
   0% { background-size: 10px 3px; }
@@ -11,7 +18,7 @@ const rikSpikeRoll = keyframes`
   100% { background-size: 10px 3px, 10px 3px, 10px 3px, 10px 10px, 10px 30px, 10px 50px; }
 `;
 
-const StyledLoader = styled.div`
+const Loader = styled.div`
   position: relative;
   width: 85px;
   height: 50px;
@@ -22,4 +29,9 @@ const StyledLoader = styled.div`
   animation: ${rikSpikeRoll} 0.65s linear infinite alternate;
 `;
 
+const StyledLoader = () => (
+  <Container>
+    <Loader />
+  </Container>
+);
 export default StyledLoader;

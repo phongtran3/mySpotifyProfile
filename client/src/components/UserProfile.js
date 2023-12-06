@@ -13,6 +13,12 @@ import StyledLoader from "../styles/Loader";
 
 const { colors, spacing, fontSizes } = theme;
 
+const LoaderContainer = styled.div`
+  ${mixins.flexCenter};
+  width: 100%;
+  height: 90vh;
+`;
+
 const Header = styled.header`
   ${mixins.flexCenter};
   flex-direction: column;
@@ -59,8 +65,14 @@ export default function UserProfile() {
 
   return (
     <>
-      <div>Profile</div>
-      <button onClick={logout}>Logout</button>
+      {user ? (
+        <Main>
+          <div>Profile</div>
+          <button onClick={logout}>Logout</button>
+        </Main>
+      ) : (
+        <StyledLoader />
+      )}
     </>
   );
 }
