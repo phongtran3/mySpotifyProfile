@@ -10,6 +10,7 @@ const express = require("express");
 const cors = require("cors");
 const querystring = require("querystring");
 const cookieParser = require("cookie-parser");
+const bodyParser = require("body-parser");
 const history = require("connect-history-api-fallback");
 const axios = require("axios");
 
@@ -32,6 +33,7 @@ app
   .use(express.static(path.resolve(__dirname, "../client/build")))
   .use(cors())
   .use(cookieParser())
+  .use(bodyParser.json())
   .use(
     history({
       verbose: true,
@@ -117,6 +119,11 @@ app.get("/callback", async (req, res) => {
 app.get("/refresh_token", async (req, res) => {
   console.log("Refresh");
   const refreshToken = req.query.refresh_token;
+
+  if (refreshToken == null) {
+    return res.status(400).json({ error: "Invalid refresh_token" });
+  }
+
   try {
     const response = await axios.post(
       "https://accounts.spotify.com/api/token",
@@ -133,9 +140,9 @@ app.get("/refresh_token", async (req, res) => {
     );
 
     const accessToken = response.data.access_token;
-    res.send({ accessToken });
+    res.json({ accessToken });
   } catch (err) {
-    res.status(500).send({ error: "Internal Server Error" });
+    res.status(500).json({ error: "Internal Server Error" });
   }
 });
 

@@ -16,12 +16,15 @@ const getLocalRefreshToken = () => window.localStorage.getItem("spotifyRefreshTo
 const refreshAccessToken = async () => {
   try {
     console.log("Refreshing...");
-    const { data } = await axios.get(`http://localhost:3001/refresh_token?refresh_token=${getLocalRefreshToken()}`);
-    const { access_token } = data;
-    setLocalAccessToken(access_token);
-    window.location.reload();
-    console.log("Returning...");
-    return;
+    const refresh_token = getLocalRefreshToken();
+    if (refresh_token != null) {
+      const { data } = await axios.get(`http://localhost:3001/refresh_token?refresh_token=${encodeURIComponent(refresh_token)}`);
+      const { access_token } = data;
+      setLocalAccessToken(access_token);
+      window.location.reload();
+      console.log("Returning...");
+      return;
+    }
   } catch (err) {
     console.error(err);
   }
