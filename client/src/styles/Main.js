@@ -7,9 +7,9 @@ const Main = styled.main`
   margin: 0 auto;
   max-width: 1400px;
   min-height: 100vh;
-  padding: 80px;
+  padding: 50px 80px;
   ${media.desktop`
-    padding: 60px 50px;
+    padding: 50px 50px;
   `};
   ${media.tablet`
     padding: 50px 40px;

@@ -13,12 +13,6 @@ import StyledLoader from "../styles/Loader";
 
 const { colors, spacing, fontSizes } = theme;
 
-const LoaderContainer = styled.div`
-  ${mixins.flexCenter};
-  width: 100%;
-  height: 90vh;
-`;
-
 const Header = styled.header`
   ${mixins.flexCenter};
   flex-direction: column;
@@ -30,14 +24,59 @@ const Avatar = styled.div`
   height: 250px;
   img {
     border-radius: 100%;
+    height: 100%;
+    width: 100%;
   }
+`;
+
+const NoAvatar = styled.div`
+  border: 2px solid currentColor;
+  border-radius: 100%;
+  padding: ${spacing.md};
 `;
 
 const UserName = styled.a`
   &:hover,
   &:focus {
-    color: ${colors.lightGreen};
+    color: ${colors.green};
   }
+`;
+
+const Name = styled.h1`
+  font-size: 60px;
+  font-weight: 700;
+  margin: 20px 0 0;
+  ${media.tablet`
+      font-size: 50px;
+    `};
+  ${media.phablet`
+      font-size: 10vw;
+    `};
+`;
+
+const UserStats = styled.div`
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-gap: 30px;
+  margin-top: ${spacing.base};
+`;
+
+const Stat = styled.div`
+  text-align: center;
+`;
+
+const Number = styled.div`
+  color: ${colors.green};
+  font-weight: 700;
+  font-size: ${fontSizes.xxl};
+`;
+
+const NumLabel = styled.p`
+  color: ${colors.lightestGrey};
+  font-size: ${fontSizes.md};
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-top: ${spacing.xs};
 `;
 
 export default function UserProfile() {
@@ -63,12 +102,45 @@ export default function UserProfile() {
     fetchData();
   }, []);
 
+  const totalPlaylists = playlists ? playlists.total : 0;
   return (
     <>
       {user ? (
         <Main>
-          <div>Profile</div>
-          <button onClick={logout}>Logout</button>
+          <Header>
+            <Avatar>
+              {user.images.length > 0 ? (
+                <img src={user.images[1].url} alt="avatar" />
+              ) : (
+                <NoAvatar>
+                  <IconUser />
+                </NoAvatar>
+              )}
+            </Avatar>
+            <UserName href={user.external_urls.spotify} target="_blank" rel="noopener noreferrer">
+              <Name>{user.display_name}</Name>
+            </UserName>
+            <UserStats>
+              <Stat>
+                <Number>{user.followers.total}</Number>
+                <NumLabel>Following</NumLabel>
+              </Stat>
+              {followedArtists && (
+                <Stat>
+                  <Number>{followedArtists.artists.items.length}</Number>
+                  <NumLabel>Following</NumLabel>
+                </Stat>
+              )}
+              {totalPlaylists && (
+                <Stat>
+                  <Link to="playlists">
+                    <Number>{totalPlaylists}</Number>
+                    <NumLabel>Playlists</NumLabel>
+                  </Link>
+                </Stat>
+              )}
+            </UserStats>
+          </Header>
         </Main>
       ) : (
         <StyledLoader />
