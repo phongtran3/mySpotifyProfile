@@ -54,15 +54,22 @@ const Name = styled.h1`
     `};
 `;
 
+const Stat = styled.div`
+  text-align: center;
+`;
+
 const UserStats = styled.div`
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   grid-gap: 30px;
   margin-top: ${spacing.base};
-`;
-
-const Stat = styled.div`
-  text-align: center;
+  ${Stat}:last-child {
+    &:hover {
+      color: ${colors.white};
+      background-color: ${colors.darkGrey};
+      border-bottom: 5px solid ${colors.green};
+    }
+  }
 `;
 
 const Number = styled.div`
@@ -79,11 +86,13 @@ const NumLabel = styled.p`
   font-size: ${fontSizes.md};
   text-transform: uppercase;
   letter-spacing: 1px;
-  margin-top: ${spacing.xs};
+  margin: ${spacing.sm} 0;
   ${media.thone`
     font-size: ${fontSizes.xs};
   `};
 `;
+
+const LogOutButton = styled.a``;
 
 export default function UserProfile() {
   const [user, setUser] = useState();

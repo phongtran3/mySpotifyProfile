@@ -121,10 +121,10 @@ const MenuItem = styled.li`
     &.active {
       color: ${colors.white};
       background-color: ${colors.black};
-      border-left: 5px solid ${colors.offGreen};
+      border-left: 5px solid ${colors.lightGreen};
       ${media.tablet`
         border-left: 0;
-        border-top: 3px solid ${colors.offGreen};
+        border-top: 3px solid ${colors.lightGreen};
       `};
     }
   }
