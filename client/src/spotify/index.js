@@ -19,9 +19,9 @@ const refreshAccessToken = async () => {
     const refresh_token = getLocalRefreshToken();
     if (refresh_token != null) {
       const { data } = await axios.get(`http://localhost:3001/refresh_token?refresh_token=${encodeURIComponent(refresh_token)}`);
-      const { access_token } = data;
-      setLocalAccessToken(access_token);
-      window.location.reload();
+      const { accessToken } = data;
+      setLocalAccessToken(accessToken);
+      //window.location.reload();
       console.log("Returning...");
       return;
     }
@@ -30,7 +30,9 @@ const refreshAccessToken = async () => {
   }
 };
 
+// Get access token off of query params (called on application init)
 export const getAccessToken = () => {
+  console.log("Getting...");
   const { error, access_token, refresh_token } = getHashParams();
   if (error) {
     console.error(error);

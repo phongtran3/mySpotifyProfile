@@ -69,6 +69,9 @@ const Number = styled.div`
   color: ${colors.green};
   font-weight: 700;
   font-size: ${fontSizes.xxl};
+  ${media.thone`
+    font-size: ${fontSizes.lg};
+  `};
 `;
 
 const NumLabel = styled.p`
@@ -77,6 +80,9 @@ const NumLabel = styled.p`
   text-transform: uppercase;
   letter-spacing: 1px;
   margin-top: ${spacing.xs};
+  ${media.thone`
+    font-size: ${fontSizes.xs};
+  `};
 `;
 
 export default function UserProfile() {

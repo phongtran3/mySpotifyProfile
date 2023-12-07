@@ -6,7 +6,7 @@ const sizes = {
   desktop: 1200,
   netbook: 1000,
   tablet: 768,
-  thone: 600,
+  thone: 600, //comobo of phone + tablet
   phablet: 480,
   phone: 376,
   tiny: 330,
