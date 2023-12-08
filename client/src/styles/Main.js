@@ -5,9 +5,9 @@ import media from "./media";
 const Main = styled.main`
   width: 100%;
   margin: 0 auto;
-  max-width: 1400px;
+  max-width: 1520px;
   min-height: 100vh;
-  padding: 50px 80px;
+  padding: 50px;
   ${media.desktop`
     padding: 50px 50px;
   `};

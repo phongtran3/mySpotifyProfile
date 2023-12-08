@@ -17,11 +17,13 @@ const refreshAccessToken = async () => {
   try {
     console.log("Refreshing...");
     const refresh_token = getLocalRefreshToken();
+    console.log(refresh_token);
     if (refresh_token != null) {
       const { data } = await axios.get(`http://localhost:3001/refresh_token?refresh_token=${encodeURIComponent(refresh_token)}`);
       const { accessToken } = data;
+      console.log(accessToken);
       setLocalAccessToken(accessToken);
-      //window.location.reload();
+      window.location.reload();
       console.log("Returning...");
       return;
     }
