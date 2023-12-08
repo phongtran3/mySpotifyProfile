@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { logout, getCurrentUserInfo } from "../spotify";
+import TrackItem from "./TrackItem";
 
 import IconUser from "../icons/user";
 import IconInfo from "../icons/info";
@@ -327,6 +328,13 @@ export default function UserProfile() {
                   <StyledLoader />
                 )}
               </ArtistContainer>
+            </UserList>
+
+            <UserList>
+              <UserListHeading>
+                <h3>Top Tracks of All Time</h3>
+                <MoreButton to="/tracks">See More</MoreButton>
+              </UserListHeading>
             </UserList>
           </PreviewSection>
         </Main>
