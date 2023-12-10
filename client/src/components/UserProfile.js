@@ -196,6 +196,7 @@ const ArtistContainer = styled.div`
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
   grid-gap: 20px 10px;
   margin-top: 50px;
+  justify-items: start;
   ${media.desktop`
     grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
   `}
@@ -335,6 +336,7 @@ export default function UserProfile() {
                 <h3>Top Tracks of All Time</h3>
                 <MoreButton to="/tracks">See More</MoreButton>
               </UserListHeading>
+              <ul>{topTracks ? topTracks.items.slice(0, 10).map((track, i) => <TrackItem track={track} key={i} />) : <StyledLoader />}</ul>
             </UserList>
           </PreviewSection>
         </Main>
