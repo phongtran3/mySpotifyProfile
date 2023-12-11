@@ -181,7 +181,6 @@ const Mask = styled.div`
   bottom: 0;
   left: 0;
   right: 0;
-  border-radius: 100%;
   font-size: 20px;
   color: ${colors.white};
   opacity: 0;
@@ -224,7 +223,6 @@ const ArtistArtWork = styled(Link)`
     width: 100%;
     min-width: 100%;
     height: 100%;
-    border-radius: 100%;
   }
 `;
 

@@ -86,14 +86,6 @@ const TrackAlbum = styled.div`
   color: ${colors.lightGrey};
   font-size: ${fontSizes.sm};
   margin-top: ${spacing.sm};
-  // span {
-  //   border-bottom: 1px solid transparent;
-  //   transition: border-bottom 0.3s;
-  //   &:hover,
-  //   &:focus {
-  //     border-bottom: 1px solid ${colors.white};
-  //   }
-  // }
 `;
 
 const TrackDuration = styled.span`
@@ -109,9 +101,6 @@ const TrackContainer = styled.div`
 `;
 
 export default function TrackItem({ track }) {
-  //console.log(track.album.external_urls.spotify);
-  //track.artists[i].external_urls.spotify
-  //track.album.external_urls.spotify
   return (
     <li>
       <TrackContainer>
