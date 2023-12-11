@@ -43,11 +43,30 @@ const GlobalStyle = createGlobalStyle`
     transition: ${theme.transition};
     cursor: pointer;
   }
-  
+
   ol, ul {
     padding: 0;
     margin: 0;
     list-style: none;
+  }
+
+  button {
+    display: inline-block;
+    color: ${colors.lightestGrey};
+    font-family: ${fonts.primary};
+    font-size: ${fontSizes.base};
+    font-weight: 700;
+    border-radius: 50px;
+    border: 0;
+    padding: 10px 20px;
+    cursor: pointer;
+    transition: ${theme.transition};
+
+    &:hover,
+    &:focus {
+      color: ${colors.white};
+      outline: 0;
+    }
   }
 `;
 

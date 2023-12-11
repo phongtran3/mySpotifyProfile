@@ -66,6 +66,7 @@ const UserStats = styled.div`
   margin-top: ${spacing.base};
   ${Stat}:last-child {
     border-bottom: 5px solid transparent;
+    &:focus,
     &:hover {
       color: ${colors.white};
       background-color: ${colors.darkGrey};
@@ -226,7 +227,7 @@ const ArtistArtWork = styled(Link)`
   }
 `;
 
-const ArtistName = styled.a`
+const ArtistName = styled(Link)`
   margin: ${spacing.base} 0;
   border-bottom: 1px solid transparent;
   font-weight: 700;
@@ -317,7 +318,7 @@ export default function UserProfile() {
                             <IconInfo />
                           </Mask>
                         </ArtistArtWork>
-                        <ArtistName href={`${artist.external_urls.spotify}`} target="_blank" rel="noopener noreferrer">
+                        <ArtistName to={`${artist.external_urls.spotify}`} target="_blank" rel="noopener noreferrer">
                           {artist.name}
                         </ArtistName>
                       </Artist>
