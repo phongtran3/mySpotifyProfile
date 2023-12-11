@@ -155,7 +155,7 @@ export default function TopArtists() {
 
   const changeRange = async (range) => {
     try {
-      const { data } = apiCalls[range];
+      const { data } = await apiCalls[range];
       setTopArtists(data);
       setTimeRange(range);
     } catch (err) {
