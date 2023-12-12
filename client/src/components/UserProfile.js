@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { logout, getCurrentUserInfo } from "../spotify";
-import TrackItem from "./TrackItem";
+import TrackItem from "./TrackItemPreview";
 
 import IconUser from "../icons/user";
 import IconInfo from "../icons/info";
