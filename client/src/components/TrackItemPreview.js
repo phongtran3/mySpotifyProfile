@@ -32,6 +32,7 @@ const TrackLeft = styled.span`
   white-space: nowrap;
   padding-right: 1px;
 `;
+
 const TrackRight = styled.span``;
 const TrackArtwork = styled(Link)`
   display: inline-block;
@@ -77,6 +78,7 @@ const AlbumLinks = styled(Link)`
     border-bottom: 1px solid ${colors.white};
   }
 `;
+
 const TrackAlbum = styled.div`
   overflow: hidden;
   text-overflow: ellipsis;

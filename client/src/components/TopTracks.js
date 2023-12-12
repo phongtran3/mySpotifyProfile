@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
 import IconClock from "../icons/clock";
+import TrackItem from "./TrackItem";
 
 import { getTopTracksLong, getTopTracksMedium, getTopTracksShort } from "../spotify";
 import StyledLoader from "../styles/Loader";
-
 import styled from "styled-components";
 import theme from "../styles/theme";
 import mixins from "../styles/mixins";
@@ -47,22 +47,20 @@ const TimeRangeButton = styled.button`
     }
   }
 `;
-
 const TrackContainer = styled.div`
   margin-top: 50px;
 `;
 const TrackContainerHeader = styled.div`
   display: grid;
   grid-template-columns:
-    [index] 16px
+    [index] 25px
     [first] minmax(120px, 4fr)
     [var1] minmax(120px, 2fr)
     [last] minmax(120px, 1fr);
   grid-gap: ${spacing.base};
-  border-bottom: 1px solid ${colors.lightGrey}
+  border-bottom: 1px solid ${colors.lightGrey};
   height: 30px;
 `;
-
 const Index = styled.div`
   display: flex;
   align-items: center;
@@ -97,7 +95,6 @@ const Duration = styled.div`
     height: 20px;
   }
 `;
-
 export default function TopTracks() {
   const [topTracks, setTopTracks] = useState();
   const [timeRange, setTimeRange] = useState("long");
@@ -149,6 +146,7 @@ export default function TopTracks() {
           </TimeRangeButton>
         </TimeRanges>
       </Header>
+
       <TrackContainer>
         <TrackContainerHeader>
           <Index>#</Index>
@@ -158,6 +156,7 @@ export default function TopTracks() {
             <IconClock></IconClock>
           </Duration>
         </TrackContainerHeader>
+        <div>{topTracks ? topTracks.items.map((track, i) => <TrackItem track={track} index={i} key={i} />) : <StyledLoader></StyledLoader>}</div>
       </TrackContainer>
     </Main>
   );
