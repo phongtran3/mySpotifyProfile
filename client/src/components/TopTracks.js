@@ -100,17 +100,20 @@ export default function TopTracks() {
   const [timeRange, setTimeRange] = useState("long");
 
   const apiCalls = {
-    long: getTopTracksLong(),
-    medium: getTopTracksMedium(),
-    short: getTopTracksShort(),
+    long: (params) => getTopTracksLong(params),
+    medium: (params) => getTopTracksMedium(params),
+    short: (params) => getTopTracksShort(params),
   };
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const { data } = await getTopTracksLong();
-        console.log(data);
-        setTopTracks(data);
+        let arr = [];
+        const { data: dataSet1 } = await getTopTracksLong({ limit: 50, offset: 0 });
+        const { data: dataSet2 } = await getTopTracksLong({ limit: 50, offset: 49 });
+        dataSet2.items.shift(); //offset 49 returns the 49th element included in first call
+        arr = [...dataSet1.items, ...dataSet2.items];
+        setTopTracks(arr);
       } catch (err) {
         console.error(err);
       }
@@ -120,8 +123,13 @@ export default function TopTracks() {
 
   const changeRange = async (range) => {
     try {
-      const { data } = await apiCalls[range];
-      setTopTracks(data);
+      let arr = [];
+      //const { data } = await apiCalls[range];
+      const { data: dataSet1 } = await apiCalls[range]({ limit: 50, offset: 0 });
+      const { data: dataSet2 } = await apiCalls[range]({ limit: 50, offset: 49 });
+      dataSet2.items.shift(); //offset 49 returns the 49th element included in first call
+      arr = [...dataSet1.items, ...dataSet2.items];
+      setTopTracks(arr);
       setTimeRange(range);
     } catch (err) {
       console.error(err);
@@ -156,7 +164,7 @@ export default function TopTracks() {
             <IconClock></IconClock>
           </Duration>
         </TrackContainerHeader>
-        <div style={{ marginTop: "20px" }}>{topTracks ? topTracks.items.map((track, i) => <TrackItem track={track} index={i} key={i} />) : <StyledLoader></StyledLoader>}</div>
+        <div style={{ marginTop: "20px" }}>{topTracks ? topTracks.map((track, i) => <TrackItem track={track} index={i} key={i} />) : <StyledLoader />}</div>
       </TrackContainer>
     </Main>
   );
