@@ -156,7 +156,7 @@ export default function TopTracks() {
             <IconClock></IconClock>
           </Duration>
         </TrackContainerHeader>
-        <div>{topTracks ? topTracks.items.map((track, i) => <TrackItem track={track} index={i} key={i} />) : <StyledLoader></StyledLoader>}</div>
+        <div style={{ marginTop: "20px" }}>{topTracks ? topTracks.items.map((track, i) => <TrackItem track={track} index={i} key={i} />) : <StyledLoader></StyledLoader>}</div>
       </TrackContainer>
     </Main>
   );

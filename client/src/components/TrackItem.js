@@ -38,7 +38,7 @@ const Item = styled.div`
     [last] minmax(120px, 1fr);
   grid-gap: 20px;
   margin-bottom: 30px;
-
+  padding: 10px 0;
   &:hover,
   &:focus {
     background-color: ${colors.darkGrey};
@@ -118,8 +118,6 @@ const TrackName = styled(Link)`
 `;
 
 const AlbumLinks = styled(Link)`
-  width: max-content;
-  display: flex;
   border-bottom: 1px solid transparent;
   transition: border-bottom 0.3s;
   &:hover,
@@ -138,7 +136,7 @@ export default function TrackItem({ track, index }) {
   const imagesLength = images ? images.length : 0;
 
   return (
-    <div style={{ marginTop: "20px" }}>
+    <div>
       <Item>
         <Index>{index + 1}</Index>
         <Title>
@@ -154,13 +152,15 @@ export default function TrackItem({ track, index }) {
                 {name}
               </TrackName>
             )}
-            {artists &&
-              artists.map(({ name }, i) => (
-                <AlbumLinks to={`${track.artists[i].external_urls.spotify}`} key={i} target="_blank" rel="noopener noreferrer">
-                  {name}
-                  {artists.length > 0 && i === artists.length - 1 ? "" : ","}&nbsp;
-                </AlbumLinks>
-              ))}
+            <div>
+              {artists &&
+                artists.map(({ name }, i) => (
+                  <AlbumLinks to={`${track.artists[i].external_urls.spotify}`} key={i} target="_blank" rel="noopener noreferrer">
+                    {name}
+                    {artists.length > 0 && i === artists.length - 1 ? "" : ","}&nbsp;
+                  </AlbumLinks>
+                ))}
+            </div>
           </TrackLeft>
         </Title>
         <AlbumName>
