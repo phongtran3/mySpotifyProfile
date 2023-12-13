@@ -136,16 +136,20 @@ export default function TopArtists() {
   const [timeRange, setTimeRange] = useState("long");
 
   const apiCalls = {
-    long: getTopArtistsLong(),
-    medium: getTopArtistsMedium(),
-    short: getTopArtistsShort(),
+    long: (params) => getTopArtistsLong(params),
+    medium: (params) => getTopArtistsMedium(params),
+    short: (params) => getTopArtistsShort(params),
   };
 
   useEffect(() => {
     const fetchData = async () => {
+      let arr = [];
       try {
-        const { data } = await getTopArtistsLong();
-        setTopArtists(data);
+        const { data: dataSet1 } = await getTopArtistsLong({ limit: 50, offset: 0 });
+        const { data: dataSet2 } = await getTopArtistsLong({ limit: 50, offset: 49 });
+        dataSet2.items.shift(); //offset 49 returns the 49th element included in first call
+        arr = [...dataSet1.items, ...dataSet2.items];
+        setTopArtists(arr);
       } catch (err) {
         console.error(err);
       }
@@ -155,8 +159,11 @@ export default function TopArtists() {
 
   const changeRange = async (range) => {
     try {
-      const { data } = await apiCalls[range];
-      setTopArtists(data);
+      let arr = [];
+      const { data: dataSet1 } = await apiCalls[range]({ limit: 50, offset: 0 });
+      const { data: dataSet2 } = await apiCalls[range]({ limit: 50, offset: 49 });
+      arr = [...dataSet1.items, ...dataSet2.items];
+      setTopArtists(arr);
       setTimeRange(range);
     } catch (err) {
       console.error(err);
@@ -182,7 +189,7 @@ export default function TopArtists() {
       </Header>
       <ArtistsContainer>
         {topArtists ? (
-          topArtists.items.map(({ id, external_urls, images, name }, i) => (
+          topArtists.map(({ id, external_urls, images, name }, i) => (
             <Artist key={i}>
               <ArtistArtwork to={`/artist/${id}`}>
                 {images.length && <img src={images[0].url} alt="Artist" />}

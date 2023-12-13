@@ -101,9 +101,24 @@ export const getPlaylists = () => axios.get("https://api.spotify.com/v1/me/playl
  * https://developer.spotify.com/documentation/web-api/reference/get-users-top-artists-and-tracks/
  * TBD PAGINATION
  */
-export const getTopArtistsShort = () => axios.get("https://api.spotify.com/v1/me/top/artists?limit=50&time_range=short_term", { headers });
-export const getTopArtistsMedium = () => axios.get("https://api.spotify.com/v1/me/top/artists?limit=50&time_range=medium_term", { headers });
-export const getTopArtistsLong = () => axios.get("https://api.spotify.com/v1/me/top/artists?limit=50&time_range=long_term", { headers });
+export const getTopArtistsShort = ({ limit, offset }) => {
+  const stringLimit = String(limit || 50);
+  const stringOffset = String(offset || 0);
+
+  return axios.get(`https://api.spotify.com/v1/me/top/artists?limit=${stringLimit}&offset=${stringOffset}&time_range=short_term`, { headers });
+};
+export const getTopArtistsMedium = ({ limit, offset }) => {
+  const stringLimit = String(limit || 50);
+  const stringOffset = String(offset || 0);
+
+  return axios.get(`https://api.spotify.com/v1/me/top/artists?limit=${stringLimit}&offset=${stringOffset}&time_range=medium_term`, { headers });
+};
+export const getTopArtistsLong = ({ limit, offset }) => {
+  const stringLimit = String(limit || 50);
+  const stringOffset = String(offset || 0);
+
+  return axios.get(`https://api.spotify.com/v1/me/top/artists?limit=${stringLimit}&offset=${stringOffset}&time_range=long_term`, { headers });
+};
 
 /*
  * Get a User's Top Tracks
