@@ -186,7 +186,7 @@ export const getPlaylistTracks = (playlistId) => axios.get(`https://api.spotify.
 
 // Get current User profile page information
 export const getCurrentUserInfo = () =>
-  axios.all([getCurrentUser(), getFollowing(), getPlaylists(), getTopArtistsLong(), getTopTracksLong(50, 0)]).then(
+  axios.all([getCurrentUser(), getFollowing(), getPlaylists(), getTopArtistsLong(50, 0), getTopTracksLong(50, 0)]).then(
     axios.spread((user, followedArtists, playlists, topArtists, topTracks) => ({
       user: user.data,
       followedArtists: followedArtists.data,
