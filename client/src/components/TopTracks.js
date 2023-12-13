@@ -57,6 +57,10 @@ const TrackContainerHeader = styled.div`
     [first] minmax(120px, 4fr)
     [var1] minmax(120px, 2fr)
     [last] minmax(120px, 1fr);
+  ${media.tablet`
+    grid-template-columns:
+    [index] 10px [first] 1fr [last] max-content;
+  `}
   grid-gap: ${spacing.base};
   border-bottom: 1px solid ${colors.lightGrey};
   height: 30px;
@@ -93,6 +97,9 @@ const Duration = styled.div`
     margin-right: 32px;
     width: 20px;
     height: 20px;
+    ${media.tablet`
+      margin-right: 0;
+    `}
   }
 `;
 export default function TopTracks() {

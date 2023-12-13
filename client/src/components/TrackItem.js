@@ -9,7 +9,7 @@ import theme from "../styles/theme";
 import mixins from "../styles/mixins";
 import media from "../styles/media";
 
-const { colors, spacing } = theme;
+const { colors, spacing, fontSizes } = theme;
 
 const Mask = styled.div`
   ${mixins.flexCenter};
@@ -37,12 +37,17 @@ const Item = styled.div`
     [var1] minmax(120px, 2fr)
     [last] minmax(120px, 1fr);
   grid-gap: 20px;
-  margin-bottom: 30px;
+  margin-bottom: 15px;
   padding: 10px 0;
   &:hover,
   &:focus {
     background-color: ${colors.darkGrey};
   }
+  ${media.tablet`
+    grid-template-columns:
+    [index] 10px [first] 1fr [last] max-content;
+    grid-gap: 10px;
+  `}
 `;
 
 const Index = styled.div`
@@ -56,6 +61,7 @@ const Title = styled.div`
   display: flex;
   align-items: center;
   color: ${colors.lightGrey};
+  overflow: hidden;
 `;
 
 const AlbumName = styled.div`
@@ -78,6 +84,9 @@ const Duration = styled.div`
     width: 20px;
     height: 20px;
   }
+  ${media.tablet`
+    font-size: ${fontSizes.sm};
+  `}
 `;
 
 const TrackLeft = styled.span`
@@ -104,13 +113,22 @@ const TrackArtwork = styled(Link)`
       opacity: 1;
     }
   }
+  ${media.tablet`
+    margin-right: ${spacing.sm};
+    width: 50px;
+    min-width: 50px;
+    height: 50px;
+  `}
 `;
 
 const TrackName = styled(Link)`
-  margin-bottom: 5px;
+  width: 100%;
   border-bottom: 1px solid transparent;
   font-weight: 700;
   margin-bottom: 10px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
   &:hover,
   &:focus {
     border-bottom: 1px solid ${colors.white};
@@ -129,9 +147,18 @@ const AlbumLinks = styled(Link)`
 const TrackDuration = styled.span`
   color: ${colors.lightGrey};
   margin-right: 32px;
+  ${media.tablet`
+    margin-right: 0;
+  `}
 `;
+
+const TrackArtists = styled.div`
+  overflow: hidden;
+  text-overflow: ellipsis;
+`;
+
 export default function TrackItem({ track, index }) {
-  const { id, name, artists, album, duration_ms } = track;
+  const { name, artists, album, duration_ms } = track;
   const { images } = album;
   const imagesLength = images ? images.length : 0;
 
@@ -152,7 +179,7 @@ export default function TrackItem({ track, index }) {
                 {name}
               </TrackName>
             )}
-            <div>
+            <TrackArtists>
               {artists &&
                 artists.map(({ name }, i) => (
                   <AlbumLinks to={`${track.artists[i].external_urls.spotify}`} key={i} target="_blank" rel="noopener noreferrer">
@@ -160,7 +187,7 @@ export default function TrackItem({ track, index }) {
                     {artists.length > 0 && i === artists.length - 1 ? "" : ","}&nbsp;
                   </AlbumLinks>
                 ))}
-            </div>
+            </TrackArtists>
           </TrackLeft>
         </Title>
         <AlbumName>
