@@ -88,7 +88,7 @@ export const getFollowing = () => axios.get("https://api.spotify.com/v1/me/follo
  * Get Current User's Recently Played Tracks
  * https://developer.spotify.com/documentation/web-api/reference/get-recently-played
  */
-export const getRecentlyPlayed = () => axios.get("https://api.spotify.com/v1/me/player/recently-played", { headers });
+export const getRecentlyPlayed = () => axios.get("https://api.spotify.com/v1/me/player/recently-played?limit=50", { headers });
 
 /*
  * Get a List of Current User's Playlists

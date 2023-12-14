@@ -101,7 +101,7 @@ const TrackContainer = styled.div`
   margin-bottom: ${spacing.md};
 `;
 
-export default function TrackItem({ track }) {
+export default function TrackItemPreview({ track }) {
   return (
     <li>
       <TrackContainer>

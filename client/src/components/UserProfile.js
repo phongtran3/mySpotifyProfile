@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { logout, getCurrentUserInfo } from "../spotify";
-import TrackItem from "./TrackItemPreview";
+import TrackItemPreview from "./TrackItemPreview";
 
 import IconUser from "../icons/user";
 import IconInfo from "../icons/info";
@@ -335,7 +335,7 @@ export default function UserProfile() {
                 <h3>Top Tracks of All Time</h3>
                 <MoreButton to="/tracks">See More</MoreButton>
               </UserListHeading>
-              <ul>{topTracks ? topTracks.items.slice(0, 10).map((track, i) => <TrackItem track={track} key={i} />) : <StyledLoader />}</ul>
+              <ul>{topTracks ? topTracks.items.slice(0, 10).map((track, i) => <TrackItemPreview track={track} key={i} />) : <StyledLoader />}</ul>
             </UserList>
           </PreviewSection>
         </Main>
