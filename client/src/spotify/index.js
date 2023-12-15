@@ -195,7 +195,6 @@ export const getPlaylistTracks = async (playlistId) => {
     // Update nextUrl for the next page
     nextUrl = next;
   }
-  console.log(allTracks);
   return allTracks;
 };
 

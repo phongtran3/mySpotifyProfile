@@ -18,7 +18,20 @@ export default function Playlist() {
     const fetchData = async () => {
       try {
         const tracks = await getPlaylistTracks(playlistId);
-        setPlaylist(tracks);
+
+        const sortedTracks = tracks.slice().sort((a, b) => {
+          const artistA = a.track.artists[0].name.toUpperCase(); // Ignore case for sorting
+          const artistB = b.track.artists[0].name.toUpperCase();
+          if (artistA < artistB) {
+            return -1; // Artist A comes before Artist B
+          }
+          if (artistA > artistB) {
+            return 1; // Artist A comes after Artist B
+          }
+          return 0; // Artists are equal
+        });
+        console.log(sortedTracks);
+        setPlaylist(sortedTracks);
       } catch (err) {
         console.error(err);
       }
@@ -29,6 +42,18 @@ export default function Playlist() {
   return (
     <Main>
       <h2>Playlist</h2>
+      {playlist ? (
+        <>
+          {playlist &&
+            playlist.map(({ track }, i) => (
+              <p key={i}>
+                {i + 1} - {track.name}
+              </p>
+            ))}
+        </>
+      ) : (
+        <StyledLoader />
+      )}
     </Main>
   );
 }
