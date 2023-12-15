@@ -182,7 +182,22 @@ export const getPlaylist = (playlistId) => axios.get(`https://api.spotify.com/v1
  * Get a Playlist's Tracks
  * https://developer.spotify.com/documentation/web-api/reference/get-playlists-tracks/
  */
-export const getPlaylistTracks = (playlistId) => axios.get(`https://api.spotify.com/v1/playlists/${playlistId}/tracks`, { headers });
+export const getPlaylistTracks = async (playlistId) => {
+  let url = `https://api.spotify.com/v1/playlists/${playlistId}/tracks`;
+  let nextUrl = url;
+  let allTracks = [];
+
+  while (nextUrl) {
+    const { data } = await axios.get(nextUrl, { headers });
+    const { items, next } = data;
+    // Add the items to the array
+    allTracks = [...allTracks, ...items];
+    // Update nextUrl for the next page
+    nextUrl = next;
+  }
+  console.log(allTracks);
+  return allTracks;
+};
 
 // Get current User profile page information
 export const getCurrentUserInfo = () =>

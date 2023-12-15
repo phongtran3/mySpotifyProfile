@@ -110,7 +110,6 @@ export default function Playlists() {
     const fetchData = async () => {
       try {
         const { data } = await getPlaylists();
-        console.log(data.items);
         setPlaylists(data.items);
       } catch (err) {
         console.error(err);

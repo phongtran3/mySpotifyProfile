@@ -6,6 +6,7 @@ import TopArtists from "./TopArtists";
 import TopTracks from "./TopTracks";
 import RecentlyPlayed from "./RecentlyPlayed";
 import Playlists from "./Playlists";
+import Playlist from "./Playlist";
 import NavBar from "./NavBar";
 
 import styled from "styled-components";
@@ -56,6 +57,7 @@ export default function Home() {
         <Route path="tracks" element={<TopTracks />} />
         <Route path="recent" element={<RecentlyPlayed />} />
         <Route path="playlists" element={<Playlists />} />
+        <Route path="playlists/:playlistId" element={<Playlist />} />
       </Routes>
     </SiteWrapper>
   );
