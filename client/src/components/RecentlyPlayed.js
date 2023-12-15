@@ -19,7 +19,6 @@ export default function RecentlyPlayed() {
       try {
         const { data } = await getRecentlyPlayed();
         setRecentlyPlayed(data.items);
-        console.log(data.items);
       } catch (err) {
         console.error(err);
       }

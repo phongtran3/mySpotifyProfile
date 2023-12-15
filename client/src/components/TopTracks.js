@@ -50,58 +50,6 @@ const TimeRangeButton = styled.button`
 const TrackContainer = styled.div`
   margin-top: 50px;
 `;
-// const TrackContainerHeader = styled.div`
-//   display: grid;
-//   grid-template-columns:
-//     [index] 25px
-//     [first] minmax(120px, 4fr)
-//     [var1] minmax(120px, 2fr)
-//     [last] minmax(120px, 1fr);
-//   ${media.tablet`
-//     grid-template-columns:
-//     [index] 10px [first] 1fr [last] max-content;
-//   `}
-//   grid-gap: ${spacing.base};
-//   border-bottom: 1px solid ${colors.lightGrey};
-//   height: 30px;
-// `;
-// const Index = styled.div`
-//   display: flex;
-//   align-items: center;
-//   justify-self: end;
-//   color: ${colors.lightGrey};
-// `;
-
-// const Title = styled.div`
-//   display: flex;
-//   align-items: center;
-//   color: ${colors.lightGrey};
-// `;
-
-// const AlbumName = styled.div`
-//   display: flex;
-//   align-items: center;
-//   color: ${colors.lightGrey};
-//   ${media.tablet`
-//     display: none;
-//   `}
-// `;
-
-// const Duration = styled.div`
-//   color: ${colors.lightGrey};
-//   display: flex;
-//   align-items: center;
-//   justify-content: flex-end;
-//   grid-column: last;
-//   svg {
-//     margin-right: 32px;
-//     width: 20px;
-//     height: 20px;
-//     ${media.tablet`
-//       margin-right: 0;
-//     `}
-//   }
-// `;
 
 export default function TopTracks() {
   const [topTracks, setTopTracks] = useState();
@@ -121,8 +69,6 @@ export default function TopTracks() {
         const { data: dataSet2 } = await getTopTracksLong({ limit: 50, offset: 49 });
         dataSet2.items.shift(); //offset 49 returns the 49th element included in first call
         arr = [...dataSet1.items, ...dataSet2.items];
-        console.log(arr);
-
         setTopTracks(arr);
       } catch (err) {
         console.error(err);
