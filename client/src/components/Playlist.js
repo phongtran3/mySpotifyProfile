@@ -14,23 +14,29 @@ export default function Playlist() {
   const { playlistId } = useParams();
   const [playlist, setPlaylist] = useState(null);
 
+  const removeSpecialCharacters = (str) => str.replace(/[^a-zA-Z0-9]/g, "");
+  const getArtistName = (track) => {
+    if (track && track.artists && track.artists.length > 0 && track.artists[0].name) {
+      return track.artists[0].name.toUpperCase();
+    }
+    return "ZZZ_DEFAULT_STRING"; // Use a default string for comparison
+  };
+
   useEffect(() => {
     const fetchData = async () => {
       try {
         const tracks = await getPlaylistTracks(playlistId);
-
         const sortedTracks = tracks.slice().sort((a, b) => {
-          const artistA = a.track.artists[0].name.toUpperCase(); // Ignore case for sorting
-          const artistB = b.track.artists[0].name.toUpperCase();
-          if (artistA < artistB) {
-            return -1; // Artist A comes before Artist B
+          const nameA = removeSpecialCharacters(getArtistName(a.track || {}));
+          const nameB = removeSpecialCharacters(getArtistName(b.track || {}));
+          if (nameA < nameB) {
+            return -1; // Name A comes before Name B
           }
-          if (artistA > artistB) {
-            return 1; // Artist A comes after Artist B
+          if (nameA > nameB) {
+            return 1; // Name A comes after Name B
           }
-          return 0; // Artists are equal
+          return 0; // Names are equal
         });
-        console.log(sortedTracks);
         setPlaylist(sortedTracks);
       } catch (err) {
         console.error(err);
@@ -46,9 +52,13 @@ export default function Playlist() {
         <>
           {playlist &&
             playlist.map(({ track }, i) => (
-              <p key={i}>
-                {i + 1} - {track.name}
-              </p>
+              <>
+                {track && track.name && (
+                  <p key={i}>
+                    {i + 1} {track.name}
+                  </p>
+                )}
+              </>
             ))}
         </>
       ) : (
