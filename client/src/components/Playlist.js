@@ -13,15 +13,21 @@ const { colors, fontSizes, spacing } = theme;
 
 const Header = styled.div`
   display: flex;
+  ${media.tablet`
+    flex-direction: column;
+  `}
 `;
 
-const PlaylistName = styled.h3`
+const PlaylistName = styled.h1`
   font-weight: 700;
 `;
 
 const PlaylistOwner = styled.p`
-  font-size: ${fontSizes.sm};
+  font-size: ${fontSizes.md};
   color: ${colors.lightGrey};
+  ${media.phablet`
+    font-size: ${fontSizes.sm};
+  `}
 `;
 
 const PlaylistCover = styled.div`
@@ -32,14 +38,12 @@ const PlaylistCover = styled.div`
   img {
     width: 100%;
   }
-  ${media.tablet`
-    display: none;
-  `};
 `;
 
 const PlaylistMeta = styled.div`
   display: flex;
   flex-flow: column;
+  justify-content: flex-end;
 `;
 
 export default function Playlist() {
@@ -128,7 +132,7 @@ export default function Playlist() {
                 <PlaylistName>{playlist.name}</PlaylistName>
               </a>
               <PlaylistOwner>
-                {playlist.owner.display_name} &nbsp;&middot;&nbsp; {playlist.tracks.total} Songs &nbsp;&middot;&nbsp; about {duration.hours} hr {duration.minutes} min
+                {playlist.owner.display_name} &nbsp;&middot;&nbsp; {playlist.tracks.total} Songs &nbsp;&middot;&nbsp; About {duration.hours} hr {duration.minutes} min
               </PlaylistOwner>
             </PlaylistMeta>
           </Header>
