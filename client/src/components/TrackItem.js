@@ -158,6 +158,8 @@ const TrackArtists = styled.div`
 `;
 
 export default function TrackItem({ track, index }) {
+  if (!track) return;
+
   const { name, artists, album, duration_ms } = track;
   const { images } = album;
   const imagesLength = images ? images.length : 0;
@@ -168,7 +170,7 @@ export default function TrackItem({ track, index }) {
         <Index>{index + 1}</Index>
         <Title>
           <TrackArtwork to={`${track.external_urls.spotify}`} target="_blank" rel="noopener noreferrer">
-            {imagesLength && <img src={images[1].url} alt="Album Artwork" />}
+            {imagesLength ? <img src={images[1].url} alt="Album Artwork" /> : "no image"}
             <Mask>
               <IconInfo />
             </Mask>

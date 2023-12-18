@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { Link, useParams } from "react-router-dom";
 import { getPlaylist, getPlaylistTracks } from "../spotify";
-import { formatDuration } from "../utils";
+import TracksContainerHeader from "./TracksContainerHeader";
+import TrackItem from "./TrackItem";
 
 import StyledLoader from "../styles/Loader";
 import styled from "styled-components";
@@ -44,6 +45,10 @@ const PlaylistMeta = styled.div`
   display: flex;
   flex-flow: column;
   justify-content: flex-end;
+`;
+
+const TrackContainer = styled.div`
+  margin-top: 50px;
 `;
 
 export default function Playlist() {
@@ -99,10 +104,6 @@ export default function Playlist() {
         const totalHours = Math.floor(totalDurationMs / (1000 * 60 * 60));
         const totalMinutes = Math.floor((totalDurationMs % (1000 * 60 * 60)) / (1000 * 60));
 
-        console.log(totalDurationMs);
-        console.log(sortedTracks);
-        console.log(data);
-
         setDuration({
           hours: totalHours,
           minutes: totalMinutes,
@@ -120,7 +121,6 @@ export default function Playlist() {
     <>
       {playlist ? (
         <Main>
-          <h2>Playlist</h2>
           <Header>
             {playlist.images.length && (
               <PlaylistCover>
@@ -136,22 +136,10 @@ export default function Playlist() {
               </PlaylistOwner>
             </PlaylistMeta>
           </Header>
-          {playlistTracks ? (
-            <>
-              {playlistTracks &&
-                playlistTracks.map(({ track }, i) => (
-                  <>
-                    {track && track.name && (
-                      <p key={i}>
-                        {i + 1} {track.name}
-                      </p>
-                    )}
-                  </>
-                ))}
-            </>
-          ) : (
-            <StyledLoader />
-          )}
+          <TrackContainer>
+            <TracksContainerHeader />
+            <div style={{ marginTop: "20px" }}>{playlistTracks ? playlistTracks.map(({ track }, i) => <TrackItem track={track} index={i} key={i} />) : <StyledLoader />}</div>
+          </TrackContainer>
         </Main>
       ) : (
         <StyledLoader />
