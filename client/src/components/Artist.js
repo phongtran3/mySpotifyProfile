@@ -202,10 +202,13 @@ export default function Artist() {
         console.log(artistTopTracks.tracks);
 
         const albumAndEP = artistAlbums.items.filter((album) => album.album_group === "album" || album.total_tracks > 3);
+        const sortedAlbum = albumAndEP.sort((a, b) => {
+          return b.release_date.localeCompare(a.release_date);
+        });
 
         console.log(albumAndEP);
         setArtist(artist);
-        setArtistAlbums(albumAndEP);
+        setArtistAlbums(sortedAlbum);
         setArtistTopTracks(artistTopTracks.tracks);
       } catch (err) {
         console.error(err);
