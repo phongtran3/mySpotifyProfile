@@ -156,14 +156,14 @@ export const getArtist = (artistId) => axios.get(`https://api.spotify.com/v1/art
  * Get Artist's top tracks
  * https://developer.spotify.com/documentation/web-api/reference/get-an-artists-top-tracks
  */
-export const getArtistTopTracks = (artistId) => axios.get(`https://api.spotify.com/v1/artists/${artistId}/top-tracks`, { headers });
+export const getArtistTopTracks = (artistId) => axios.get(`https://api.spotify.com/v1/artists/${artistId}/top-tracks?market=US`, { headers });
 
 /** TBD
  * Get Artist's Ablums. Get Spotify catalog information about an artist's albums.
- * Just albums. No single, appear_on, or compilation
+ * Just albums.
  * https://developer.spotify.com/documentation/web-api/reference/get-an-artists-albums
  */
-export const getArtistAblums = (artistId) => axios.get(`https://api.spotify.com/v1/artists/${artistId}/albums?include_groups=album`, { headers });
+export const getArtistAblums = (artistId) => axios.get(`https://api.spotify.com/v1/artists/${artistId}/albums?include_groups=album,single&offset=0&limit=50`, { headers });
 
 /** TBD
  *  Get Artist's selected albumn. Get Spotify catalog information for a single album.

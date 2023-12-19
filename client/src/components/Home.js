@@ -8,6 +8,7 @@ import RecentlyPlayed from "./RecentlyPlayed";
 import Playlists from "./Playlists";
 import Playlist from "./Playlist";
 import NavBar from "./NavBar";
+import Artist from "./Artist";
 
 import styled from "styled-components";
 import media from "../styles/media";
@@ -41,6 +42,7 @@ export default function Home() {
           <Route path="recent" element={<RecentlyPlayed />} />
           <Route path="playlists" element={<Playlists />} />
           <Route path="playlists/:playlistId" element={<Playlist />} />
+          <Route path="artist/:artistId" element={<Artist />} />
         </Routes>
       </ScrollToTop>
     </SiteWrapper>

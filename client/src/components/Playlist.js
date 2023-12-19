@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Link, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { getPlaylist, getPlaylistTracks } from "../spotify";
 import TracksContainerHeader from "./TracksContainerHeader";
 import TrackItem from "./TrackItem";

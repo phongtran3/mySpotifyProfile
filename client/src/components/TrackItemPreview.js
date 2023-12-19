@@ -6,6 +6,7 @@ import IconInfo from "../icons/info";
 import styled from "styled-components";
 import theme from "../styles/theme";
 import mixins from "../styles/mixins";
+import media from "../styles/media";
 const { colors, fontSizes, spacing } = theme;
 
 const Mask = styled.div`
@@ -51,6 +52,11 @@ const TrackArtwork = styled(Link)`
       opacity: 1;
     }
   }
+  ${media.tablet`
+    width: 100px;
+    min-width: 100px;
+    height: 100px;
+    `}
 `;
 
 const TrackName = styled(Link)`
