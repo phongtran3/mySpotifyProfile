@@ -52,7 +52,12 @@ const TrackArtwork = styled(Link)`
       opacity: 1;
     }
   }
-  ${media.tablet`
+  ${media.netbook`
+    width: 125px;
+    min-width: 125px;
+    height: 125px;
+    `}
+  ${media.phablet`
     width: 100px;
     min-width: 100px;
     height: 100px;

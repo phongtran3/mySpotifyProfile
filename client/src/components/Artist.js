@@ -138,7 +138,7 @@ const ArtistContainer = styled.div`
 
 const AlbumContainer = styled.div`
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
   grid-gap: 20px 15px;
   margin-top: 50px;
   justify-items: start;
@@ -154,6 +154,8 @@ const Album = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  text-align: center;
+  width: 100%;
   &:hover,
   &:focus {
     ${Mask} {
@@ -176,6 +178,10 @@ const AlbumName = styled(Link)`
   margin: ${spacing.base} 0;
   border-bottom: 1px solid transparent;
   font-weight: 700;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  width: 100%;
+  white-space: nowrap;
   &:hover,
   &:focus {
     border-bottom: 1px solid ${colors.white};
