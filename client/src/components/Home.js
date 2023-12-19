@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { Routes, Route, useNavigate } from "react-router-dom";
+import { Routes, Route, useLocation } from "react-router-dom";
 
 import UserProfile from "./UserProfile";
 import TopArtists from "./TopArtists";
@@ -12,15 +12,6 @@ import NavBar from "./NavBar";
 import styled from "styled-components";
 import media from "../styles/media";
 
-import { logout } from "../spotify";
-// <Container fluid>{accessToken ? <Home /> : <Login />}</Container>
-{
-  /* <Link className="btn btn-success btn-lg" href={"/"}>
-Home
-</Link>
-<button onClick={logout}>Logout</button> */
-}
-
 const SiteWrapper = styled.div`
   padding-left: 100px;
   ${media.tablet`
@@ -29,11 +20,11 @@ const SiteWrapper = styled.div`
 `;
 
 const ScrollToTop = ({ children }) => {
-  const navigate = useNavigate();
+  const { pathname } = useLocation();
 
   useEffect(() => {
-    navigate(window.location.pathname, { replace: true });
-  }, [navigate]);
+    window.scrollTo(0, 0);
+  }, [pathname]);
 
   return children;
 };
@@ -42,23 +33,16 @@ export default function Home() {
   return (
     <SiteWrapper>
       <NavBar />
-      <Routes>
-        <Route
-          path="/"
-          element={
-            <>
-              <ScrollToTop>
-                <UserProfile />
-              </ScrollToTop>
-            </>
-          }
-        />
-        <Route path="artists" element={<TopArtists />} />
-        <Route path="tracks" element={<TopTracks />} />
-        <Route path="recent" element={<RecentlyPlayed />} />
-        <Route path="playlists" element={<Playlists />} />
-        <Route path="playlists/:playlistId" element={<Playlist />} />
-      </Routes>
+      <ScrollToTop>
+        <Routes>
+          <Route path="/" element={<UserProfile />} />
+          <Route path="artists" element={<TopArtists />} />
+          <Route path="tracks" element={<TopTracks />} />
+          <Route path="recent" element={<RecentlyPlayed />} />
+          <Route path="playlists" element={<Playlists />} />
+          <Route path="playlists/:playlistId" element={<Playlist />} />
+        </Routes>
+      </ScrollToTop>
     </SiteWrapper>
   );
 }

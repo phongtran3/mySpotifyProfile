@@ -121,7 +121,8 @@ const TrackArtwork = styled(Link)`
   `}
 `;
 
-const TrackName = styled(Link)`
+const TrackName = styled.span`
+  cursor: pointer;
   width: 100%;
   border-bottom: 1px solid transparent;
   font-weight: 700;
@@ -155,6 +156,7 @@ const TrackDuration = styled.span`
 const TrackArtists = styled.div`
   overflow: hidden;
   text-overflow: ellipsis;
+  margin-top: ${spacing.sm};
 `;
 
 export default function TrackItem({ track, index }) {
@@ -177,8 +179,10 @@ export default function TrackItem({ track, index }) {
           </TrackArtwork>
           <TrackLeft>
             {name && (
-              <TrackName to={`${track.external_urls.spotify}`} target="_blank" rel="noopener noreferrer">
-                {name}
+              <TrackName>
+                <a href={`${track.external_urls.spotify}`} target="_blank" rel="noopener noreferrer">
+                  {name}
+                </a>
               </TrackName>
             )}
             <TrackArtists>
