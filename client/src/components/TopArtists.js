@@ -197,9 +197,7 @@ export default function TopArtists() {
                   <IconInfo />
                 </Mask>
               </ArtistArtwork>
-              <ArtistName to={external_urls.spotify} target="_blank" rel="noopener noreferrer">
-                {name}
-              </ArtistName>
+              <ArtistName to={`/artist/${id}`}>{name}</ArtistName>
             </Artist>
           ))
         ) : (

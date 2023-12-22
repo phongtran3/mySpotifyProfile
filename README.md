@@ -41,16 +41,8 @@
   - Followers
   - Popularity
   - Genres
-- As a user, I want to see an artist's album details (TBD).
-  - Album type
-  - Total number of tracks
-  - Album name
-  - Release date
-  - Artist
-  - Genres
-  - Popularity
 
-**Artist Discography (TBD):**
+**Artist Discography:**
 
 - As a user, I want to see an artist's discography.
   - Artist's albums
